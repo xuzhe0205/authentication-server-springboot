@@ -1,0 +1,10 @@
+server:
+  port: 8081
+#    context-path: /mongodb
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: testmongodb
