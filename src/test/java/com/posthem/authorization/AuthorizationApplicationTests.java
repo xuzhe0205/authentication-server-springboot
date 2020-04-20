@@ -1,10 +1,10 @@
-package com.posthem.authentication;
+package com.posthem.authorization;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuthenticationApplicationTests {
+class AuthorizationApplicationTests {
 
 	@Test
 	void contextLoads() {
