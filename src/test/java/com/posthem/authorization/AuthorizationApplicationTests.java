@@ -1,12 +1,15 @@
 package com.posthem.authorization;
 
+import com.posthem.authorization.common.exception.ResourceNotFoundException;
 import com.posthem.authorization.dao.UserRepository;
 import com.posthem.authorization.entity.AuthProvider;
 import com.posthem.authorization.entity.User;
+import com.posthem.authorization.security.UserPrincipal;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -52,6 +55,16 @@ class AuthorizationApplicationTests {
 	@Test
 	public void testExistsByEmail(){
 		System.out.println("existed user? " + userRepository.existsUserByEmail("oliverxu@123.com"));
+	}
+
+	@Test
+	public UserDetails loadUserById() {
+		User user = userRepository.findUserById("5e9f56559de9ad767821a6c4");
+		if (user == null) {
+			throw new ResourceNotFoundException("User", "id", "5e9f56559de9ad767821a6c4");
+		}
+
+		return UserPrincipal.create(user);
 	}
 
 }
