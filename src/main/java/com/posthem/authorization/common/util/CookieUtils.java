@@ -1,4 +1,4 @@
-package com.posthem.authorization.common;
+package com.posthem.authorization.common.util;
 
 import org.springframework.util.SerializationUtils;
 

@@ -1,9 +1,9 @@
 package com.posthem.authorization.common.config;
 
-import com.posthem.authorization.security.CustomUserDetailsService;
+import com.posthem.authorization.security.oauth2.handler.OAuth2AuthenticationFailureHandler;
+import com.posthem.authorization.security.service.CustomUserDetailsService;
 import com.posthem.authorization.security.RestAuthenticationEntryPoint;
 import com.posthem.authorization.security.TokenAuthenticationFilter;
-import com.posthem.authorization.security.oauth2.handler.OAuth2AuthenticationFailureHandler;
 import com.posthem.authorization.security.oauth2.handler.OAuth2AuthenticationSuccessHandler;
 import com.posthem.authorization.security.oauth2.CustomOAuth2UserService;
 import com.posthem.authorization.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
@@ -30,6 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
@@ -131,3 +132,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
+

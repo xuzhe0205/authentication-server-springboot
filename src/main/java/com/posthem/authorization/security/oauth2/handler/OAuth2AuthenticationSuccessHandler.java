@@ -1,7 +1,7 @@
 package com.posthem.authorization.security.oauth2.handler;
 
 
-import com.posthem.authorization.common.CookieUtils;
+import com.posthem.authorization.common.util.CookieUtils;
 import com.posthem.authorization.common.config.AppPropertiesConfig;
 import com.posthem.authorization.common.exception.BadRequestException;
 import com.posthem.authorization.security.TokenProvider;
@@ -69,9 +69,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String token = tokenProvider.createToken(authentication);
 
-        return UriComponentsBuilder.fromUriString(targetUrl)
+        String uri = UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", token)
                 .build().toUriString();
+        return uri;
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request, HttpServletResponse response) {
@@ -82,7 +83,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private boolean isAuthorizedRedirectUri(String uri) {
         URI clientRedirectUri = URI.create(uri);
 
-        return appPropertiesConfig.getOauth2().getAuthorizedRedirectUris()
+        Boolean isAuthorized = appPropertiesConfig.getOauth2().getAuthorizedRedirectUris()
                 .stream()
                 .anyMatch(authorizedRedirectUri -> {
                     // Only validate host and port. Let the clients use different paths if they want to
@@ -93,5 +94,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                     }
                     return false;
                 });
+        return isAuthorized;
     }
 }

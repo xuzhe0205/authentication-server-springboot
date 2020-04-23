@@ -27,12 +27,16 @@ public class TokenProvider {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appPropertiesConfig.getAuth().getTokenExpirationMsec());
 
-        return Jwts.builder()
+        String secret = appPropertiesConfig.getAuth().getTokenSecret();
+
+        String token = Jwts.builder()
                 .setSubject(userPrincipal.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, appPropertiesConfig.getAuth().getTokenSecret())
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
+        return token;
+
     }
 
     public String getUserIdFromToken(String token) {

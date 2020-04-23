@@ -1,6 +1,6 @@
 package com.posthem.authorization.security.oauth2.handler;
 
-import com.posthem.authorization.common.CookieUtils;
+import com.posthem.authorization.common.util.CookieUtils;
 import com.posthem.authorization.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;

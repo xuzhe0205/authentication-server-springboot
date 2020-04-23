@@ -58,13 +58,12 @@ class AuthorizationApplicationTests {
 	}
 
 	@Test
-	public UserDetails loadUserById() {
-		User user = userRepository.findUserById("5e9f56559de9ad767821a6c4");
+	public void loadUserById() {
+		User user = userRepository.findUserById("5e9f56559de9ad767821a6c4fff");
 		if (user == null) {
 			throw new ResourceNotFoundException("User", "id", "5e9f56559de9ad767821a6c4");
 		}
 
-		return UserPrincipal.create(user);
 	}
 
 }

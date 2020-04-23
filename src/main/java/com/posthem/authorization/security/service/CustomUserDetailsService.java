@@ -1,8 +1,9 @@
-package com.posthem.authorization.security;
+package com.posthem.authorization.security.service;
 
 import com.posthem.authorization.common.exception.ResourceNotFoundException;
 import com.posthem.authorization.dao.UserRepository;
 import com.posthem.authorization.entity.User;
+import com.posthem.authorization.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

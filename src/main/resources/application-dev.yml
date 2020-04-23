@@ -43,7 +43,7 @@ spring:
 
 myapp:
   auth:
-    tokenSecret: 44030119950205
+    tokenSecret: testtest
     tokenExpirationMsec: 864000000
   oauth2:
     # After successfully authenticating with the OAuth2 Provider,
