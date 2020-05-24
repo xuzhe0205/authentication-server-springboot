@@ -14,15 +14,15 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
 # misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
+*.factorypath
 
 # System Files
 .DS_Store
