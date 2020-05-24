@@ -23,6 +23,8 @@
 
 # misc
 *.factorypath
+/authorization.iml
+/.factorypath
 
 # System Files
 .DS_Store
