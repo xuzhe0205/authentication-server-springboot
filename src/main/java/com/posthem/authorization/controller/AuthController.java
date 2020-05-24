@@ -24,6 +24,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -63,9 +65,12 @@ public class AuthController {
             throw new BadRequestException("Email address already in use.");
         }
 
+        Map<String, Object> resData = new HashMap<>();
+
         // Creating user's account
         User user = new User();
         user.setName(signUpRequest.getName());
+
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(signUpRequest.getPassword());
         user.setProvider(AuthProvider.local);
@@ -78,8 +83,29 @@ public class AuthController {
                 .fromCurrentContextPath().path("/user/me")
                 .buildAndExpand(result.getId()).toUri();
 
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        signUpRequest.getEmail(),
+                        signUpRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = tokenProvider.createToken(authentication);
+
+        resData.put("id", result.getId());
+        resData.put("email", result.getEmail());
+        resData.put("name", result.getName());
+        resData.put("provider", "local");
+        resData.put("emailVerified", false);
+        resData.put("imageUrl", "");
+        resData.put("accessToken", token);
+
+
+
         return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "User registered successfully@", user));
+                .body(new ApiResponse(true, "User registered successfully@", resData));
     }
 
 }

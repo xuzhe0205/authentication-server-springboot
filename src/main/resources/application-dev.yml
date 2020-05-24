@@ -3,8 +3,12 @@ spring:
   profiles: dev
   data:
     mongodb:
-      uri: mongodb+srv://xuzhe:Qiantu2013@posthemmongocluster0-3w35q.mongodb.net/test?retryWrites=true&w=majority
+      host: localhost
+      port: 27017
+      authentication-database: posthemDB
       database: posthemDB
+      username: xuzhe
+      password: xuzhe950205
 
 
   security:
