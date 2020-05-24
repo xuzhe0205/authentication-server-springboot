@@ -25,6 +25,7 @@
 *.factorypath
 /authorization.iml
 /.factorypath
+/HELP.md
 
 # System Files
 .DS_Store
